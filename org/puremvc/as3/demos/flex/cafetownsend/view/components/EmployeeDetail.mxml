@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ PureMVC AS3 Demo - Flex CafeTownsend
+ Copyright (c) 2007-08 Michael Ramirez <michael.ramirez@puremvc.org>
+ Parts Copyright (c) 2005-07 Adobe Systems, Inc. 
+ Your reuse is governed by the Creative Commons Attribution 3.0 License
+-->
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*" width="100%" horizontalAlign="center">
+
+	<mx:Script>
+		<![CDATA[
+			import org.puremvc.as3.demos.flex.cafetownsend.*;
+	    	import mx.events.ValidationResultEvent;
+			import mx.controls.Alert;
+            import mx.events.CloseEvent;
+
+			public static const CANCEL_EDITS:String		= "cancelEdits";
+			public static const DELETE_EMPLOYEE:String	= "deleteEmployee";
+			public static const SAVE_EDITS:String	= "saveEdits";
+
+			// mutate the back button's click event
+			private function cancelEmployeeEdits() : void 
+			{
+				dispatchEvent( new Event( CANCEL_EDITS ) );
+			}
+
+			// the delete button's click event is an Alert asking them to verify the delete
+			// the Alert's closeHandler is directed here to be mutated into a flash event if the answer was OK
+			private function deleteEmployee( cEvent:CloseEvent ) : void 
+			{
+				// was the Alert event an OK
+                if ( cEvent.detail == Alert.OK ) 
+				{
+					dispatchEvent( new Event( DELETE_EMPLOYEE ) );
+				}
+			}
+
+			// mutate the submit button's click event
+			private function saveEmployeeEdits() : void 
+			{
+				vFirstname.enabled = true;
+				vLastName.enabled = true;
+				vEmail.enabled = true;
+				// first, validate the fields
+				var noFirstName : Boolean = vFirstname.validate().type == ValidationResultEvent.INVALID;
+				var noLastName : Boolean = vLastName.validate().type == ValidationResultEvent.INVALID;
+				var noEmail : Boolean = vEmail.validate().type == ValidationResultEvent.INVALID;
+				
+				// if any of the fields were not valid
+				if ( noFirstName || noLastName || noEmail ) 
+				{
+					// return focus to the firstname field and do nothing else
+					firstname.setFocus();
+					return;
+				}
+				
+				dispatchEvent( new Event( SAVE_EDITS ) );
+			}
+			
+			public function resetForm():void
+			{
+				vFirstname.enabled = false;
+				vLastName.enabled = false;
+				vEmail.enabled = false;
+				firstname.text = "";
+				lastname.text = "";
+				email.text = "";
+				startdate.selectedDate = new Date();
+				delete_btn.enabled = false;
+			}
+		]]>
+	</mx:Script>
+
+    <mx:StringValidator id="vFirstname"  source="{firstname}" property="text" required="true" />
+    <mx:StringValidator id="vLastName"  source="{lastname}" property="text" required="true" />
+    <mx:StringValidator id="vEmail"  source="{email}" property="text" required="true" />
+
+	<mx:Panel title="Employee Details" horizontalCenter="0">
+	<mx:Spacer width="100%" height="10" />
+	<mx:Button label="&lt;&lt; Back" click="cancelEmployeeEdits()" />
+	<mx:Form defaultButton="{submit}" paddingTop="10">
+		<mx:FormItem label="First Name:"  required="true">
+			<mx:TextInput id="firstname" />
+		</mx:FormItem>
+		<mx:FormItem label="Last Name:"  required="true">
+			<mx:TextInput id="lastname"/>
+		</mx:FormItem>
+		<mx:FormItem label="Start Date:">
+			<mx:DateField id="startdate" />
+		</mx:FormItem>
+		<mx:FormItem label="Email:"  required="true">
+			<mx:TextInput id="email" />
+		</mx:FormItem>
+		<mx:FormItem direction="horizontal">
+			<mx:Button label="Submit" click="saveEmployeeEdits()" id="submit" />
+			<mx:Spacer width="100%" />
+			<mx:Button id="delete_btn" label="Delete"
+				click="Alert.show(	'Are you sure you want to delete the following employee?',
+									null,
+									Alert.OK | Alert.CANCEL,
+									this,
+									deleteEmployee,
+									null,
+									Alert.OK );" />
+		</mx:FormItem>
+	</mx:Form>
+		</mx:Panel>
+</mx:VBox>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ PureMVC AS3 Demo - Flex CafeTownsend
+ Copyright (c) 2007-08 Michael Ramirez <michael.ramirez@puremvc.org>
+ Parts Copyright (c) 2005-07 Adobe Systems, Inc. 
+ Your reuse is governed by the Creative Commons Attribution 3.0 License
+-->
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*" width="100%" height="100%">
+
+	<mx:Script>
+	    <![CDATA[
+	    	import mx.events.ValidationResultEvent;
+			import org.puremvc.as3.demos.flex.cafetownsend.*;
+
+			public static const APP_LOGIN:String	= "appLogin";
+
+			// mutate the loginBtn's click event into a flash event			
+			private function loginEmployee() : void 
+			{
+				vUsername.enabled = true;
+				vPassword.enabled = true;
+				// validate the fields
+				var noUsername : Boolean = vUsername.validate().type == ValidationResultEvent.INVALID;
+				var noPassword : Boolean = vPassword.validate().type == ValidationResultEvent.INVALID;
+				if (noUsername || noPassword)
+				{
+					return;
+				}
+				else
+				{
+					// if everything validates, broadcast an event
+					dispatchEvent( new Event( APP_LOGIN ) );
+				}
+			}
+			
+			public function resetLogin():void
+			{
+				vUsername.enabled = false;
+				vPassword.enabled = false;
+				username.text = "";
+				password.text = "";
+			}
+	    ]]>
+	</mx:Script>
+
+    <mx:StringValidator id="vUsername" source="{ username }" property="text" required="true"/>
+    <mx:StringValidator id="vPassword" source="{ password }" property="text" required="true"/>
+
+	<mx:Panel title="Employee Login" horizontalCenter="0">
+	    <mx:Form id="loginForm" defaultButton="{ loginBtn }">
+	    	<mx:FormItem label="Username:" required="true">
+	    		<mx:TextInput id="username" />
+	    	</mx:FormItem>
+	    	<mx:FormItem label="Password:" required="true">
+	    		<mx:TextInput id="password" displayAsPassword="true" />
+	    	</mx:FormItem>
+	    	<mx:FormItem direction="horizontal" verticalGap="15" paddingTop="20">
+	    		<mx:Button id="loginBtn" label="Login" click="loginEmployee()"/>
+	    	</mx:FormItem>
+	    </mx:Form>
+	    <mx:Label htmlText="Username: Flex   Password: PureMVC" width="100%" horizontalCenter="0" />
+	</mx:Panel>
+
+</mx:Canvas>
