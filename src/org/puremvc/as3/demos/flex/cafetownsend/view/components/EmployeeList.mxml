@@ -52,7 +52,7 @@
 	</mx:Script>
 
 	<mx:Panel title="Employee List" horizontalCenter="0">
-		<mx:HBox paddingTop="25">
+		<mx:HBox paddingTop="50">
 			<mx:Button label="Add New Employee" click="addNewEmployee()" />
 			<mx:Spacer width="100%" />
 			<mx:Button label="Logout" click="logout()" />

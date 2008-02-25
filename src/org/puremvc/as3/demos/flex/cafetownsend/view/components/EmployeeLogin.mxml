@@ -46,15 +46,15 @@
     <mx:StringValidator id="vUsername" source="{ username }" property="text" required="true"/>
     <mx:StringValidator id="vPassword" source="{ password }" property="text" required="true"/>
 
-	<mx:Panel title="Employee Login" horizontalCenter="0">
-	    <mx:Form id="loginForm" defaultButton="{ loginBtn }">
+	<mx:Panel title="Employee Login" horizontalCenter="0" >
+	    <mx:Form id="loginForm" defaultButton="{ loginBtn }" paddingTop="50">
 	    	<mx:FormItem label="Username:" required="true">
 	    		<mx:TextInput id="username" />
 	    	</mx:FormItem>
 	    	<mx:FormItem label="Password:" required="true">
 	    		<mx:TextInput id="password" displayAsPassword="true" />
 	    	</mx:FormItem>
-	    	<mx:FormItem direction="horizontal" verticalGap="15" paddingTop="20">
+	    	<mx:FormItem direction="horizontal" >
 	    		<mx:Button id="loginBtn" label="Login" click="loginEmployee()"/>
 	    	</mx:FormItem>
 	    </mx:Form>

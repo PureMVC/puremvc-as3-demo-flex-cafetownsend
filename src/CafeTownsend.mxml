@@ -19,7 +19,7 @@
 	</mx:Script>
 
 	<mx:Style source="assets/main.css" />
-	<mx:Image source="assets/header.jpg" width="700" />
+	<mx:Image source="@Embed('assets/header.jpg')" width="700" />
 	<mx:HBox paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10" backgroundColor="#ffffff" width="700">
 		<mx:VBox width="100%" verticalScrollPolicy="off" paddingRight="10">
 			<mx:ViewStack id="vwStack" width="100%" paddingBottom="10" paddingTop="10" resizeToContent="true" creationPolicy="all">
