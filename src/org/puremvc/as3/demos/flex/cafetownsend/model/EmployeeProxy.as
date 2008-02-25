@@ -12,9 +12,9 @@ package org.puremvc.as3.demos.flex.cafetownsend.model
 	import org.puremvc.as3.interfaces.*;
     import org.puremvc.as3.patterns.proxy.Proxy;
 
-	import org.puremvc.as3.demos.flex.cafetownsend.vo.Employee;
-	import org.puremvc.as3.demos.flex.cafetownsend.business.LoadEmployeesDelegate;
 	import org.puremvc.as3.demos.flex.cafetownsend.*;
+	import org.puremvc.as3.demos.flex.cafetownsend.model.vo.Employee;
+	import org.puremvc.as3.demos.flex.cafetownsend.model.business.LoadEmployeesDelegate;
     
     /**
      * A proxy for the Employee data

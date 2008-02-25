@@ -6,9 +6,9 @@
  */
 package org.puremvc.as3.demos.flex.cafetownsend.model
 {
-	import org.puremvc.as3.demos.flex.cafetownsend.vo.User;
 	import org.puremvc.as3.interfaces.*;
     import org.puremvc.as3.patterns.proxy.Proxy;
+	import org.puremvc.as3.demos.flex.cafetownsend.model.vo.User;
     
     /**
      * A proxy for the User data

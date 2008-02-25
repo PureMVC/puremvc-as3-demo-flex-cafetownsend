@@ -12,7 +12,7 @@ package org.puremvc.as3.demos.flex.cafetownsend.view
 
     import org.puremvc.as3.demos.flex.cafetownsend.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.cafetownsend.model.EmployeeProxy;
-	import org.puremvc.as3.demos.flex.cafetownsend.vo.Employee;
+	import org.puremvc.as3.demos.flex.cafetownsend.model.vo.Employee;
 	import org.puremvc.as3.demos.flex.cafetownsend.view.components.*;
     
     /**
